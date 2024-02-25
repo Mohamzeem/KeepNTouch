@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "56436627573",
+    "firebase_url": "https://chat-app-df0f1-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "chat-app-df0f1",
+    "storage_bucket": "chat-app-df0f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56436627573:android:1b3c33144bd9b6c689c03c",
+        "android_client_info": {
+          "package_name": "com.example.keep_n_touch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "56436627573-r0aeh7pevuv88q1j57lsq3od3mignfl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwmlatXGM9EcsIbqbUGwtqG_sW875XIng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "56436627573-r0aeh7pevuv88q1j57lsq3od3mignfl6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "56436627573-g78l0c4sd4ai95kjp8imbujjtb9lrd93.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.chatApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
