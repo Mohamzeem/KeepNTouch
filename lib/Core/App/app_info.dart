@@ -1,20 +1,18 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:keep_n_touch/Core/App/app_injector.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
-import 'package:keep_n_touch/Core/routes/app_navigation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class MyApp {
   MyApp._();
-  static AppNavigation get navigation => sl.get<AppNavigation>();
+  // static AppNavigation get navigation => sl.get<AppNavigation>();
   // static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static BuildContext get context =>
-      sl.get<AppNavigation>().navigatorKey.currentContext!;
+  // static BuildContext get context =>
+  //     sl.get<AppNavigation>().navigatorKey.currentContext!;
 
-  static AppConfig get config => sl.get<AppConfig>();
+  // static AppConfig get config => sl.get<AppConfig>();
 
   static String appName = 'Call Me';
   static String appFont = 'MouseMemoirs';

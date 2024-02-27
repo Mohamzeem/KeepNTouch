@@ -63,31 +63,33 @@ class CustomTextFormField extends StatelessWidget {
           color: AppColors.kBlack,
         ),
         decoration: InputDecoration(
-          prefixIcon: Icon(prefixIcon),
+          prefixIcon: Icon(
+            prefixIcon,
+            color: AppColors.mainColor,
+          ),
           suffixIcon: suffixIconShow
               ? InkWell(
                   onTap: suffixIconFunction,
                   child: obscureText
-                      ? const Icon(Icons.visibility_off)
-                      : const Icon(Icons.visibility))
+                      ? const Icon(
+                          Icons.visibility_off,
+                          color: AppColors.mainColor,
+                        )
+                      : const Icon(
+                          Icons.visibility,
+                          color: AppColors.mainColor,
+                        ))
               : const SizedBox(),
           contentPadding: EdgeInsets.symmetric(horizontal: 10.w),
-          // fillColor: AppColors.kGrey1,
-          // filled: true,
-          // hintText: hint,
-          // hintStyle: const TextStyle(
-          //   fontSize: 20,
-          //   color: AppColors.kGrey1,
-          // ),
           label: CustomText(
             text: label,
-            color: AppColors.kGrey1,
+            color: AppColors.kGrey,
             fontSize: 20,
           ),
           border: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: AppColors.kGrey1)),
+              borderSide: BorderSide(width: 0.5, color: AppColors.kGrey)),
           enabledBorder: const OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: AppColors.kGrey1)),
+              borderSide: BorderSide(width: 0.5, color: AppColors.kGrey)),
           focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(width: 0.5, color: AppColors.mainColor)),
           errorBorder: const OutlineInputBorder(

@@ -3,22 +3,22 @@ import 'package:equatable/equatable.dart';
 class MessageModel extends Equatable {
   final String? senderId;
   final String? senderName;
-  final String? receiverId;
-  final String? receiverName;
+  final String? contactId;
+  final String? contactName;
   final String? message;
   final String? createdAt;
-  final String? isRead;
-  final String? tybe;
+  final bool? isRead;
+  final bool? isText;
   final String? id;
   const MessageModel({
     this.senderId,
     this.senderName,
-    this.receiverId,
-    this.receiverName,
+    this.contactId,
+    this.contactName,
     this.message,
     this.createdAt,
     this.id,
-    this.tybe,
+    this.isText,
     this.isRead,
   });
 
@@ -26,13 +26,13 @@ class MessageModel extends Equatable {
     return <String, dynamic>{
       'senderId': senderId,
       'senderName': senderName,
-      'receiverId': receiverId,
-      'receiverName': receiverName,
+      'contactId': contactId,
+      'contactName': contactName,
       'message': message,
       'createdAt': createdAt,
       'id': id,
       'isRead': isRead,
-      'tybe': tybe,
+      'isText': isText,
     };
   }
 
@@ -40,13 +40,13 @@ class MessageModel extends Equatable {
     return MessageModel(
       senderId: map['senderId'] ?? "",
       senderName: map['senderName'] ?? "",
-      receiverId: map['receiverId'] ?? "",
-      receiverName: map['receiverName'] ?? "",
+      contactId: map['contactId'] ?? "",
+      contactName: map['contactName'] ?? "",
       message: map['message'] ?? "",
       createdAt: map['createdAt'] ?? "",
       id: map['id'] ?? "",
-      isRead: map['isRead'] ?? "",
-      tybe: map['tybe'] ?? "",
+      isRead: map['isRead'],
+      isText: map['isText'],
     );
   }
   @override
@@ -54,13 +54,13 @@ class MessageModel extends Equatable {
     return [
       senderId!,
       senderName!,
-      receiverId!,
-      receiverName!,
+      contactId!,
+      contactName!,
       message!,
       createdAt!,
       id!,
       isRead!,
-      tybe!
+      isText!
     ];
   }
 }

@@ -13,9 +13,7 @@ class ChatRoomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: ChatRoomBody(model: roomModel),
-        ),
+        body: ChatRoomBody(roomModel: roomModel),
       ),
     );
   }

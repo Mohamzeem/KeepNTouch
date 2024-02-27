@@ -1,9 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
-import 'package:keep_n_touch/Core/Utils/prints_service.dart';
-import 'package:keep_n_touch/Presentation/Authentication/view_model/auth_cubit/auth_cubit.dart';
+import 'package:keep_n_touch/Presentation/Authentication/data/auth_data.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/chat_view.dart';
 import 'package:keep_n_touch/Presentation/Contacts/contacts_view.dart';
 import 'package:keep_n_touch/Presentation/Groups/groups_view.dart';
@@ -20,9 +18,8 @@ class _ControlViewState extends State<ControlView> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<AuthCubit>(context).getProfile();
-    Prints.success(endPoint: '', message: 'Getting profile');
-    BlocProvider.of<AuthCubit>(context).checkInternet(context);
+    AuthData.getProfile();
+    AuthData.checkInternet(context);
   }
 
   List<Widget> icons = const [
@@ -72,10 +69,10 @@ class _ControlViewState extends State<ControlView> {
       //     ),
       //   ],
       // ),
-      body: getSelectedWidget(index: index),
+      body: _getSelectedWidget(index: index),
       bottomNavigationBar: CurvedNavigationBar(
           backgroundColor: Colors.transparent,
-          color: AppColors.kCard,
+          color: AppColors.secColor,
           animationDuration: const Duration(milliseconds: 300),
           height: 55,
           buttonBackgroundColor: AppColors.kCard,
@@ -86,7 +83,7 @@ class _ControlViewState extends State<ControlView> {
   }
 }
 
-Widget getSelectedWidget({required int index}) {
+Widget _getSelectedWidget({required int index}) {
   Widget widget;
   switch (index) {
     case 0:

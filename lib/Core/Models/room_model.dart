@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:keep_n_touch/Core/Utils/app_strings.dart';
 
 class RoomModel extends Equatable {
   final List? members;
@@ -73,5 +74,19 @@ class RoomModel extends Equatable {
       contactName!,
       contactPhoto!,
     ];
+  }
+
+  String get isSenderPhoto {
+    if (senderPhoto!.isEmpty || senderPhoto == "") {
+      return AppStrings.defaultAppPhoto;
+    }
+    return senderPhoto!;
+  }
+
+  String get iscontactPhoto {
+    if (contactPhoto!.isEmpty || contactPhoto == "") {
+      return AppStrings.defaultAppPhoto;
+    }
+    return contactPhoto!;
   }
 }

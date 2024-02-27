@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:keep_n_touch/Core/App/app_info.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_button.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_snack_bar.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
 import 'package:keep_n_touch/Core/Widgets/text_form_field.dart';
-import 'package:keep_n_touch/Presentation/Authentication/view_model/auth_cubit/auth_cubit.dart';
 
 class ForgotPasswordBody extends StatefulWidget {
   const ForgotPasswordBody({
@@ -56,52 +53,31 @@ class _ForgotPasswordBodyState extends State<ForgotPasswordBody> {
             prefixIcon: Icons.email,
           ),
           SizedBox(height: 20.h),
-          BlocConsumer<AuthCubit, AuthState>(
-            listener: (context, state) {
-              if (state is ForgotPasswordSuccessState) {
-                CustomSnackBar.showSuccessSnackBar(
-                    context: context,
-                    message:
-                        'Email send successfully, please check your email and reset your password');
-                emailController.clear();
-              } else if (state is ForgotPasswordFailureState) {
+          CustomButton(
+            onPressed: () {
+              if (emailController.text == '') {
                 CustomSnackBar.showErrorSnackBar(
-                    context: context, message: state.errMessage);
-              }
+                    context: context, message: 'Please enter email');
+              } else if (!emailController.text.contains('@')) {
+                CustomSnackBar.showErrorSnackBar(
+                    context: context, message: 'Please enter a valid email');
+              } else if (emailController.text.contains(' ')) {
+                CustomSnackBar.showErrorSnackBar(
+                    context: context,
+                    message: 'Email should not contain spaces');
+              } else {}
             },
-            builder: (context, state) {
-              final cubit = BlocProvider.of<AuthCubit>(context);
-              return CustomButton(
-                onPressed: () {
-                  if (emailController.text == '') {
-                    CustomSnackBar.showErrorSnackBar(
-                        context: context, message: 'Please enter email');
-                  } else if (!emailController.text.contains('@')) {
-                    CustomSnackBar.showErrorSnackBar(
-                        context: context,
-                        message: 'Please enter a valid email');
-                  } else if (emailController.text.contains(' ')) {
-                    CustomSnackBar.showErrorSnackBar(
-                        context: context,
-                        message: 'Email should not contain spaces');
-                  } else {
-                    cubit.forgotPassword(email: emailController.text);
-                  }
-                },
-                text: 'Send Email',
-                width: double.infinity,
-                height: 45,
-                threeRadius: 5,
-                lastRadius: 5,
-                fontSize: 25,
-                backgroundColor: AppColors.mainColor,
-                isLoading: state is ForgotPasswordLoadingState,
-              );
-            },
+            text: 'Send Email',
+            width: double.infinity,
+            height: 45,
+            threeRadius: 5,
+            lastRadius: 5,
+            fontSize: 25,
+            backgroundColor: AppColors.mainColor,
           ),
           SizedBox(height: 20.h),
           CustomButton(
-            onPressed: () => MyApp.navigation.goBack(),
+            onPressed: () => Navigator.of(context).pop(),
             text: 'Back',
             width: double.infinity,
             height: 45,

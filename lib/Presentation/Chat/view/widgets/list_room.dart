@@ -4,7 +4,7 @@ import 'package:keep_n_touch/Core/Models/room_model.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_circular_loading.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
-import 'package:keep_n_touch/Presentation/Chat/data/chat_api.dart';
+import 'package:keep_n_touch/Presentation/Chat/data/chat_data.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/widgets/list_room_item.dart';
 
 class ListRoom extends StatefulWidget {
@@ -20,7 +20,7 @@ class _ListRoomState extends State<ListRoom> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: ChatApi().getRooms(),
+      stream: ChatData.getRooms(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Padding(
@@ -50,8 +50,8 @@ class _ListRoomState extends State<ListRoom> {
                 // shrinkWrap: true,
                 itemCount: list.length,
                 itemBuilder: (context, index) {
-                  final item = list[index];
-                  return ListRoomItem(roomModel: item);
+                  final roomModel = list[index];
+                  return ListRoomItem(roomModel: roomModel);
                 },
               ),
             ),

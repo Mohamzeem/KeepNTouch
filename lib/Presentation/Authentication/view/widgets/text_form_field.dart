@@ -72,11 +72,11 @@ class AuthTextFormField extends StatelessWidget {
         hintText: hint,
         hintStyle: const TextStyle(
           fontSize: 20,
-          color: AppColors.kGrey1,
+          color: AppColors.kGrey,
         ),
         label: CustomText(
           text: label,
-          color: AppColors.kGrey1,
+          color: AppColors.kGrey,
           fontSize: 20,
         ),
         border: const OutlineInputBorder(
