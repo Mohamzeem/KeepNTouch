@@ -138,6 +138,8 @@ class AuthData {
         .get();
     final profile = UserModel.fromJson(result.data()!);
     await auth.currentUser!.updatePhotoURL(profile.photo);
+    // await auth.currentUser!
+    //     .updatePhoneNumber(profile.mobileNum as PhoneAuthCredential);
 
     return profile;
   } //~ update user status in firebase

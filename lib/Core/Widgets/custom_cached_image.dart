@@ -27,10 +27,7 @@ class CustomCachedImage extends StatelessWidget {
         height: height!.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(
-            // color: AppColors.mainColor,
-            width: 0.5,
-          ),
+          border: Border.all(width: 0.5, color: AppColors.mainColor),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.fill,

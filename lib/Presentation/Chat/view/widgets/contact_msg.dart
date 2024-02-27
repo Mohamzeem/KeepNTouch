@@ -37,7 +37,9 @@ class ContactMsg extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Card(
-                  elevation: 1,
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0)),
                   child: CustomCachedImage(
                     width: 35,
                     height: 35,
@@ -48,23 +50,26 @@ class ContactMsg extends StatelessWidget {
                 isText
                     ? Card(
                         child: Container(
-                            constraints: BoxConstraints(maxWidth: 280.h),
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade500,
-                              borderRadius: const BorderRadius.only(
-                                topRight: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
+                          constraints: BoxConstraints(maxWidth: 280.h),
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade500,
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              bottomLeft: Radius.circular(15),
+                              bottomRight: Radius.circular(15),
                             ),
-                            child: CustomText(
-                              text: msg,
-                              color: AppColors.kWhite,
-                            )),
+                          ),
+                          child: CustomText(
+                            text: msg,
+                            color: AppColors.kWhite,
+                          ),
+                        ),
                       )
                     : Card(
-                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0)),
+                        elevation: 5,
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(

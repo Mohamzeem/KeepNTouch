@@ -178,7 +178,7 @@ class ChatData {
     final String imagePath = file.path.split('.').last;
 
     final ref = storage
-        .ref('Images')
+        .ref('MessageImages')
         .child('$roomId/${DateTime.now().millisecondsSinceEpoch}.$imagePath');
     CustomLoading.show('Sending');
     await ref.putFile(file);

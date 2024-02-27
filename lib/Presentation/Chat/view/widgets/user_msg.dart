@@ -70,7 +70,9 @@ class UserMsg extends StatelessWidget {
                         ),
                       )
                     : Card(
-                        elevation: 1,
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0)),
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
@@ -89,6 +91,9 @@ class UserMsg extends StatelessWidget {
                         ),
                       ),
                 Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0)),
                   child: CustomCachedImage(
                     width: 35,
                     height: 35,
