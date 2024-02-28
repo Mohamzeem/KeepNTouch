@@ -14,17 +14,15 @@ class LogOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsItem(
-      onTap: () async {
-        CustomDialog.twoButtonDialog(
-          context: context,
-          textBody: 'You want to log out',
-          textButton1: 'Yes',
-          textButton2: 'No',
-          onPressed: () {
-            AuthData.signOut(context: context);
-          },
-        );
-      },
+      onTap: () async => CustomDialog.twoButtonDialog(
+        context: context,
+        textBody: 'You want to log out',
+        textButton1: 'Yes',
+        textButton2: 'No',
+        onPressed: () {
+          AuthData.signOut(context: context);
+        },
+      ),
       child: Row(
         children: [
           const Icon(

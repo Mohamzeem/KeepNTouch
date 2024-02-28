@@ -48,7 +48,7 @@ class CustomDialog {
       barrierDismissible: false,
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.secColor,
+        backgroundColor: AppColors.kWhite,
         title: Center(
           child: CustomText(
             text: textBody,
@@ -72,7 +72,12 @@ class CustomDialog {
                   ),
                   child: Card(
                       color: AppColors.mainColor,
-                      elevation: 10,
+                      elevation: 5,
+                      surfaceTintColor: AppColors.kWhite,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100.0),
+                        side: BorderSide(color: AppColors.secColor),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(10),
                         child: CustomText(
@@ -94,7 +99,12 @@ class CustomDialog {
                   ),
                   child: Card(
                     color: AppColors.kBlack,
-                    elevation: 10,
+                    elevation: 5,
+                    surfaceTintColor: AppColors.kWhite,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100.0),
+                      side: BorderSide(color: AppColors.secColor),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: Center(
@@ -110,27 +120,6 @@ class CustomDialog {
               )
             ],
           )
-          // CustomButton(
-          //   backgroundColor: AppColors.kRed,
-          //   onPressed: onPressed,
-          //   text: textButton1,
-          //   width: 320,
-          //   height: 45,
-          //   isLoading: isLoading,
-          //   lastRadius: 10,
-          //   threeRadius: 10,
-          // ),
-          // const SizedBox(height: 10, width: 1),
-          // CustomButton(
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          //   text: textButton2,
-          //   width: 320,
-          //   height: 45,
-          //   lastRadius: 10,
-          //   threeRadius: 10,
-          // )
         ],
       ),
     );

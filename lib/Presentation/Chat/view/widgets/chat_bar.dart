@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Utils/app_strings.dart';
+import 'package:keep_n_touch/Core/Utils/functions.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_button.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_cached_image.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
@@ -53,72 +55,57 @@ class _ChatBarState extends State<ChatBar> {
           padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: InkWell(
             onTap: () {
-              showModalBottomSheet(
-                useSafeArea: true,
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Card(
-                      margin: const EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const CustomText(
-                                text: 'Enter email to start new chat',
-                                color: AppColors.mainColor,
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.qr_code_scanner_sharp,
-                                  color: AppColors.mainColor,
-                                  size: 30,
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(height: 10.h),
-                          CustomTextFormField(
-                            label: 'Email',
-                            maxLength: 50,
-                            controller: emailController,
-                            keyBoard: TextInputType.emailAddress,
-                            prefixIcon: Icons.email,
-                          ),
-                          SizedBox(height: 10.h),
-                          CustomButton(
-                            onPressed: () {
-                              if (emailController.text.isEmpty) {
-                                CustomLoading.toast(
-                                    'Please enter a valid email');
-                              } else {
-                                ChatData.createChatRoom(
-                                  context: context,
-                                  email: emailController.text.trim(),
-                                );
-                                Navigator.pop(context);
-                                emailController.clear();
-                              }
-                            },
-                            text: 'Create New Chat',
-                            width: double.infinity,
-                            height: 45,
-                            threeRadius: 10,
-                            lastRadius: 10,
-                            backgroundColor: AppColors.mainColor,
-                          ),
-                        ],
+              AppFunctions.showBtmSheet(
+                context,
+                [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const CustomText(
+                        text: 'Enter email to start new chat',
+                        color: AppColors.mainColor,
                       ),
-                    ),
-                  );
-                },
+                      InkWell(
+                        onTap: () {},
+                        child: const Icon(
+                          Icons.qr_code_scanner_sharp,
+                          color: AppColors.mainColor,
+                          size: 30,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                  CustomTextFormField(
+                    label: 'Email',
+                    maxLength: 50,
+                    controller: emailController,
+                    keyBoard: TextInputType.emailAddress,
+                    prefixIcon: Icons.email,
+                  ),
+                  SizedBox(height: 10.h),
+                  CustomButton(
+                    onPressed: () {
+                      if (emailController.text.isEmpty) {
+                        CustomLoading.toast('Please enter a valid email');
+                      } else {
+                        ChatData.createChatRoom(
+                          context: context,
+                          email: emailController.text.trim(),
+                        );
+                        Navigator.pop(context);
+                        emailController.clear();
+                      }
+                    },
+                    text: 'Create New Chat',
+                    width: double.infinity,
+                    height: 45,
+                    threeRadius: 10,
+                    lastRadius: 10,
+                    backgroundColor: AppColors.mainColor,
+                  ),
+                  SizedBox(height: Platform.isIOS ? 10.h : 0.h),
+                ],
               );
             },
             child: const Icon(

@@ -1,8 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_snack_bar.dart';
 
-class AppFucntions {
-  AppFucntions._();
+class AppFunctions {
+  AppFunctions._();
+
+  static Future<dynamic> showBtmSheet(
+      BuildContext context, List<Widget> widgets) {
+    return showModalBottomSheet(
+      useSafeArea: true,
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ListView(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisSize: MainAxisSize.min,
+                shrinkWrap: true,
+                children: widgets,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   static bool validateCredentials(BuildContext context, String? email) {
     String msg = '';

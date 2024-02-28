@@ -11,16 +11,23 @@ class ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      color: AppColors.kWhite,
-      surfaceTintColor: AppColors.kWhite,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(100.0),
-        side: BorderSide(color: AppColors.secColor),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
+    return Container(
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
+        BoxShadow(
+          color: AppColors.secColor,
+          blurRadius: 10,
+          spreadRadius: 10,
+        ),
+      ]),
+      child: Card(
+        elevation: 5,
+        color: AppColors.kWhite,
+        surfaceTintColor: AppColors.kWhite,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(100.0),
+          side: BorderSide(color: AppColors.secColor),
+        ),
         child: CachedNetworkImage(
           imageUrl: FirebaseAuth.instance.currentUser!.photoURL == "" ||
                   FirebaseAuth.instance.currentUser!.photoURL == null ||

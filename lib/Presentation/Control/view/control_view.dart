@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
@@ -29,12 +31,12 @@ class _ControlViewState extends State<ControlView> {
       size: 27,
     ),
     Icon(
-      Icons.group,
+      Icons.groups,
       color: AppColors.mainColor,
       size: 27,
     ),
     Icon(
-      Icons.person,
+      Icons.contacts,
       color: AppColors.mainColor,
       size: 27,
     ),
@@ -48,37 +50,42 @@ class _ControlViewState extends State<ControlView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      // appBar: AppBar(
-      //   title: const CustomText(
-      //     text: 'Control View',
-      //     fontSize: 25,
-      //     color: AppColors.mainColor,
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       onPressed: () async {
-      //         cubit.logOut();
-      //         MyApp.navigation.navigateAndFinish(AppRouter.loginView);
-      //       },
-      //       icon: const Icon(
-      //         Icons.logout,
-      //         color: AppColors.mainColor,
-      //       ),
-      //     ),
-      //   ],
-      // ),
-      body: _getSelectedWidget(index: index),
-      bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.transparent,
-          color: AppColors.secColor,
-          animationDuration: const Duration(milliseconds: 300),
-          height: 55,
-          buttonBackgroundColor: AppColors.kCard,
-          index: index,
-          onTap: (value) => setState(() => index = value),
-          items: icons),
+    return SafeArea(
+      child: Container(
+        color: AppColors.secColor,
+        child: Scaffold(
+          extendBody: true,
+          // appBar: AppBar(
+          //   title: const CustomText(
+          //     text: 'Control View',
+          //     fontSize: 25,
+          //     color: AppColors.mainColor,
+          //   ),
+          //   actions: [
+          //     IconButton(
+          //       onPressed: () async {
+          //         cubit.logOut();
+          //         MyApp.navigation.navigateAndFinish(AppRouter.loginView);
+          //       },
+          //       icon: const Icon(
+          //         Icons.logout,
+          //         color: AppColors.mainColor,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          body: _getSelectedWidget(index: index),
+          bottomNavigationBar: CurvedNavigationBar(
+              backgroundColor: Colors.transparent,
+              color: AppColors.secColor,
+              animationDuration: const Duration(milliseconds: 300),
+              height: Platform.isAndroid ? 55 : 42,
+              buttonBackgroundColor: AppColors.kCard,
+              index: index,
+              onTap: (value) => setState(() => index = value),
+              items: icons),
+        ),
+      ),
     );
   }
 }

@@ -19,29 +19,32 @@ class SettingsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CustomText(
-              text: 'Hello, ${FirebaseAuth.instance.currentUser!.displayName}',
-              fontSize: 25,
-              color: AppColors.mainColor,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CustomText(
+                text:
+                    'Hello, ${FirebaseAuth.instance.currentUser!.displayName}',
+                fontSize: 25,
+                color: AppColors.mainColor,
+              ),
             ),
-          ),
-          SizedBox(height: 20.h),
-          const ProfileImage(),
-          SizedBox(height: 20.h),
-          const ChangeName(),
-          SizedBox(height: 5.h),
-          ChangePassword(),
-          SizedBox(height: 5.h),
-          const ChangeImage(),
-          SizedBox(height: 5.h),
-          const LogOut(),
-          SizedBox(height: 5.h),
-          const BuildVerison(),
-        ],
+            SizedBox(height: 20.h),
+            const ProfileImage(),
+            SizedBox(height: 20.h),
+            const ChangeName(),
+            SizedBox(height: 5.h),
+            const ChangePassword(),
+            SizedBox(height: 5.h),
+            const ChangeImage(),
+            SizedBox(height: 5.h),
+            const LogOut(),
+            SizedBox(height: 5.h),
+            const BuildVerison(),
+          ],
+        ),
       ),
     );
   }
