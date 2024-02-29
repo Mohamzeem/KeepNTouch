@@ -16,9 +16,6 @@ class ListRoomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (roomModel.contactId != FirebaseAuth.instance.currentUser!.uid) {
-    //   return CustomText(text: roomModel.senderName!);
-    // }
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: InkWell(
@@ -29,6 +26,7 @@ class ListRoomItem extends StatelessWidget {
           height: 60,
           child: Card(
             elevation: 5,
+            surfaceTintColor: Colors.transparent,
             color: AppColors.secColor,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
@@ -59,7 +57,14 @@ class ListRoomItem extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  const CustomText(text: 'Hello'),
+                  const CircleAvatar(
+                    radius: 15,
+                    backgroundColor: AppColors.mainColor,
+                    child: CustomText(
+                      text: '4',
+                      color: AppColors.kWhite,
+                    ),
+                  )
                 ],
               ),
             ),

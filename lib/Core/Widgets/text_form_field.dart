@@ -7,7 +7,6 @@ import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final String label;
-  // final String hint;
   final IconData prefixIcon;
   final Function()? suffixIconFunction;
   final bool suffixIconShow;

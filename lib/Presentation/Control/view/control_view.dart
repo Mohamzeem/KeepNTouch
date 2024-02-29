@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Presentation/Authentication/data/auth_data.dart';
@@ -26,22 +27,22 @@ class _ControlViewState extends State<ControlView> {
 
   List<Widget> icons = const [
     Icon(
-      Icons.chat,
+      FluentIcons.chat_32_regular,
       color: AppColors.mainColor,
       size: 27,
     ),
     Icon(
-      Icons.groups,
+      FluentIcons.chat_multiple_32_regular,
       color: AppColors.mainColor,
       size: 27,
     ),
     Icon(
-      Icons.contacts,
+      FluentIcons.book_contacts_32_regular,
       color: AppColors.mainColor,
       size: 27,
     ),
     Icon(
-      Icons.settings,
+      FluentIcons.settings_24_regular,
       color: AppColors.mainColor,
       size: 27,
     ),

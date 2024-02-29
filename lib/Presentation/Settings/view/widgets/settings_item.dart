@@ -18,6 +18,7 @@ class SettingsItem extends StatelessWidget {
       child: SizedBox(
         height: 60,
         child: Card(
+          surfaceTintColor: Colors.transparent,
           elevation: 5,
           color: AppColors.secColor,
           child: Padding(
