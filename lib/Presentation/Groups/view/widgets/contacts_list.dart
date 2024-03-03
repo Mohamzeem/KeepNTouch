@@ -5,18 +5,23 @@ import 'package:keep_n_touch/Core/Widgets/custom_cached_image.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
 
 class ContactsList extends StatefulWidget {
-  const ContactsList({super.key});
+  bool isChecked;
+  ContactsList({
+    super.key,
+    this.isChecked = false,
+  });
 
   @override
   State<ContactsList> createState() => _ContactsListState();
 }
 
 class _ContactsListState extends State<ContactsList> {
-  bool isChecked = false;
+  // bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
+      height: 500,
       child: ListView.builder(
         itemCount: 3,
         itemBuilder: (BuildContext builder, int index) {
@@ -24,7 +29,10 @@ class _ContactsListState extends State<ContactsList> {
             surfaceTintColor: AppColors.secColor,
             color: AppColors.secColor,
             child: InkWell(
-              onTap: () => setState(() => isChecked = !isChecked),
+              onTap: () {
+                setState(() => widget.isChecked = !widget.isChecked);
+                print('${widget.isChecked} is checked');
+              },
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
@@ -46,9 +54,9 @@ class _ContactsListState extends State<ContactsList> {
                       child: Transform.scale(
                         scale: 1.2,
                         child: Checkbox(
-                          value: isChecked,
+                          value: widget.isChecked,
                           onChanged: (value) =>
-                              setState(() => isChecked = value!),
+                              setState(() => widget.isChecked = value!),
                           activeColor: AppColors.secColor,
                           checkColor: AppColors.mainColor,
                           side: const BorderSide(color: AppColors.mainColor),

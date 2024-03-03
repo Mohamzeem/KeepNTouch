@@ -14,6 +14,7 @@ class AppStrings {
       'https://firebasestorage.googleapis.com/v0/b/chat-app-df0f1.appspot.com/o/blank.jpg?alt=media&token=b51191d0-8528-44b4-af9f-af10379a0069';
   //~ Firebase Collections
   static const String chatCollection = 'Chat';
+  static const String groupsCollection = 'Groups';
   static const String usersCollection = 'Users';
   static const String messagesCollection = 'Messages';
   static String notificationsCollection = 'Notifications';

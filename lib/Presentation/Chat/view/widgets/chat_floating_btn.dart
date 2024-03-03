@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
@@ -8,28 +9,21 @@ import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
 import 'package:keep_n_touch/Core/Widgets/loading.dart';
 import 'package:keep_n_touch/Core/Widgets/text_form_field.dart';
 import 'package:keep_n_touch/Presentation/Chat/data/chat_data.dart';
-import '../Utils/functions.dart';
+import 'package:keep_n_touch/Presentation/Groups/view/widgets/contacts_list.dart';
+import '../../../../Core/Utils/functions.dart';
 
-class CustomFloatingButton extends StatefulWidget {
-  final IconData iconData;
-  final String title;
-  final String label;
-  final String validator;
-  final String button;
-  const CustomFloatingButton({
-    super.key,
-    required this.title,
-    required this.label,
-    required this.validator,
-    required this.button,
-    required this.iconData,
-  });
+class ChatFloatingButton extends StatefulWidget {
+  final bool? isGroup;
+  const ChatFloatingButton({
+    Key? key,
+    this.isGroup = false,
+  }) : super(key: key);
 
   @override
-  State<CustomFloatingButton> createState() => _CustomFloatingButtonState();
+  State<ChatFloatingButton> createState() => _ChatFloatingButtonState();
 }
 
-class _CustomFloatingButtonState extends State<CustomFloatingButton> {
+class _ChatFloatingButtonState extends State<ChatFloatingButton> {
   final controller = TextEditingController();
   @override
   void dispose() {
@@ -47,7 +41,9 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CustomText(
-                text: widget.title,
+                text: widget.isGroup!
+                    ? 'Enter name of new a group'
+                    : 'Enter email to start new chat',
                 color: AppColors.mainColor,
               ),
               InkWell(
@@ -62,27 +58,38 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
           ),
           SizedBox(height: 10.h),
           CustomTextFormField(
-            label: widget.label,
+            label: widget.isGroup! ? 'Group Name' : 'Email',
             maxLength: 50,
             controller: controller,
             keyBoard: TextInputType.emailAddress,
-            prefixIcon: Icons.email,
+            prefixIcon: widget.isGroup!
+                ? FluentIcons.chat_multiple_32_filled
+                : Icons.email,
           ),
           SizedBox(height: 10.h),
           CustomButton(
             onPressed: () {
               if (controller.text.isEmpty) {
-                CustomLoading.toast(widget.validator);
+                CustomLoading.toast(widget.isGroup!
+                    ? 'Please enter a group name'
+                    : 'Please enter an email');
               } else {
-                ChatData.createChatRoom(
-                  context: context,
-                  email: controller.text.trim(),
-                );
+                widget.isGroup!
+                    ? null
+                    // ? GroupsData.createGroup(
+                    //     grpName: controller.text,
+                    //     grpMembers: [],
+                    //     context: context,
+                    //   ).then((value) => Navigator.pop(context))
+                    : ChatData.createChatRoom(
+                        context: context,
+                        email: controller.text.trim(),
+                      );
                 Navigator.pop(context);
                 controller.clear();
               }
             },
-            text: widget.button,
+            text: widget.isGroup! ? 'Add Members to Group' : 'Create New Chat',
             width: double.infinity,
             height: 45,
             threeRadius: 10,
@@ -94,7 +101,9 @@ class _CustomFloatingButtonState extends State<CustomFloatingButton> {
       ),
       backgroundColor: AppColors.secColor,
       child: Icon(
-        widget.iconData,
+        widget.isGroup!
+            ? FluentIcons.chat_multiple_32_filled
+            : FluentIcons.chat_20_filled,
         color: AppColors.mainColor,
         size: 50,
       ),

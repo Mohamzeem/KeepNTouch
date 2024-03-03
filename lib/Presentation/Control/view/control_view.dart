@@ -7,7 +7,7 @@ import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Presentation/Authentication/data/auth_data.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/chat_view.dart';
 import 'package:keep_n_touch/Presentation/Contacts/contacts_view.dart';
-import 'package:keep_n_touch/Presentation/Groups/groups_view.dart';
+import 'package:keep_n_touch/Presentation/Groups/view/groups_view.dart';
 import 'package:keep_n_touch/Presentation/Settings/view/settings_view.dart';
 
 class ControlView extends StatefulWidget {

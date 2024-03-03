@@ -9,17 +9,11 @@ import 'package:keep_n_touch/Presentation/Authentication/data/auth_data.dart';
 
 class CustomAppBar extends StatefulWidget {
   final String title;
-  final bool isSearch;
-  final bool isCloseSearch;
   final void Function() onTap;
-  final void Function() onTapInSearch;
   const CustomAppBar({
     Key? key,
     required this.title,
-    this.isSearch = false,
     required this.onTap,
-    this.isCloseSearch = false,
-    required this.onTapInSearch,
   }) : super(key: key);
 
   @override
@@ -28,6 +22,7 @@ class CustomAppBar extends StatefulWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> {
   final controller = TextEditingController();
+  bool isSearch = false;
   @override
   void dispose() {
     controller.dispose();
@@ -45,7 +40,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             photoUrl: AuthData.auth.currentUser!.photoURL == null
                 ? AppStrings.defaultAppPhoto
                 : AuthData.auth.currentUser!.photoURL!),
-        widget.isSearch
+        isSearch
             ? Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10.w, right: 5.w),
@@ -58,7 +53,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     ),
                     decoration: InputDecoration(
                       suffixIcon: InkWell(
-                        onTap: widget.onTapInSearch,
+                        onTap: widget.onTap,
                         child: const Icon(
                           FluentIcons.search_12_regular,
                           color: AppColors.kGrey,
@@ -72,20 +67,24 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 0.h, horizontal: 10.w),
                       border: const OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: AppColors.kGrey)),
+                        borderSide:
+                            BorderSide(width: 0.5, color: AppColors.kGrey),
+                      ),
                       enabledBorder: const OutlineInputBorder(
                           borderSide:
                               BorderSide(width: 0.5, color: AppColors.kGrey)),
                       focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 0.5, color: AppColors.mainColor)),
+                        borderSide:
+                            BorderSide(width: 0.5, color: AppColors.mainColor),
+                      ),
                       errorBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 0.5, color: AppColors.mainColor)),
+                        borderSide:
+                            BorderSide(width: 0.5, color: AppColors.mainColor),
+                      ),
                       focusedErrorBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 0.5, color: AppColors.mainColor)),
+                        borderSide:
+                            BorderSide(width: 0.5, color: AppColors.mainColor),
+                      ),
                     ),
                   ),
                 ),
@@ -96,9 +95,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 color: AppColors.mainColor,
               ),
         InkWell(
-          onTap: widget.onTap,
+          onTap: () {
+            setState(() {
+              isSearch = !isSearch;
+            });
+          },
           child: Icon(
-            !widget.isCloseSearch ? FluentIcons.search_24_regular : Icons.close,
+            !isSearch ? FluentIcons.search_24_regular : Icons.close,
             color: AppColors.mainColor,
             size: 40,
           ),

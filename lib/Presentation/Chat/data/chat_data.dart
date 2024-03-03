@@ -29,7 +29,7 @@ class ChatData {
       final contactPhoto = contactEmailUser.docs.first['photo'];
       final contactName = contactEmailUser.docs.first['name'];
 
-      final String userId = FirebaseAuth.instance.currentUser!.uid;
+      final String userId = auth.currentUser!.uid;
       final List<String> roomId = [userId, contactId]
         ..sort((a, b) => a.compareTo(b));
 

@@ -1,34 +1,12 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:keep_n_touch/Core/Utils/app_colors.dart';
-import 'package:keep_n_touch/Core/Utils/app_strings.dart';
-import 'package:keep_n_touch/Core/Widgets/custom_cached_image.dart';
-import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
-import 'package:keep_n_touch/Core/Widgets/text_form_field.dart';
-import 'package:keep_n_touch/Presentation/Chat/view/widgets/custom_app_bar.dart';
+import 'package:keep_n_touch/Core/Widgets/custom_app_bar.dart';
+import 'package:keep_n_touch/Presentation/Groups/view/widgets/list_grp_room_item.dart';
 
-class Groupsbody extends StatefulWidget {
+class Groupsbody extends StatelessWidget {
   const Groupsbody({
     super.key,
   });
-
-  @override
-  State<Groupsbody> createState() => _GroupsbodyState();
-}
-
-class _GroupsbodyState extends State<Groupsbody> {
-  @override
-  void dispose() {
-    nameController.dispose();
-    super.dispose();
-  }
-
-  bool isChecked = false;
-  // bool isCloseSearch = false;
-  bool isSearch = false;
-  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +15,21 @@ class _GroupsbodyState extends State<Groupsbody> {
       child: Column(
         children: [
           CustomAppBar(
-            onTapInSearch: () {},
-            onTap: () => setState(() => isSearch = !isSearch),
+            onTap: () {},
             title: 'Groups',
-            isSearch: isSearch,
-            isCloseSearch: isSearch,
           ),
           SizedBox(height: 20.h),
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 25,
-                backgroundColor: AppColors.secColor,
-              ),
-            ],
-          ),
-          SizedBox(height: 20.h),
+          const ListGroupsRoomItem()
+          // Row(
+          //   children: [
+          //     CircleAvatar(
+          //       radius: 25,
+          //       backgroundColor: AppColors.secColor,
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(height: 20.h),
+          // const ContactsList()
         ],
       ),
     );
