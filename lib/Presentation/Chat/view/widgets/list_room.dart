@@ -4,7 +4,7 @@ import 'package:keep_n_touch/Core/Models/room_model.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_circular_loading.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
-import 'package:keep_n_touch/Presentation/Chat/data/chat_data.dart';
+import 'package:keep_n_touch/Presentation/Chat/controller/chat_controller.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/widgets/list_room_item.dart';
 
 class ListRoom extends StatefulWidget {
@@ -20,7 +20,7 @@ class _ListRoomState extends State<ListRoom> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: ChatData.getRooms(),
+      stream: ChatController().getChatRooms(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Padding(
@@ -41,7 +41,7 @@ class _ListRoomState extends State<ListRoom> {
           //^ sort list of chats by last msg time
           final List<RoomModel> list = snapshot.data!
             ..sort(
-              (a, b) => b.lastMessageTime!.compareTo(b.lastMessageTime!),
+              (a, b) => b.lastMessageTime!.compareTo(a.lastMessageTime!),
             );
           return Expanded(
             child: Padding(

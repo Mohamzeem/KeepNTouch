@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:keep_n_touch/Core/App/app_info.dart';
 import 'package:keep_n_touch/Core/Utils/app_theme.dart';
-import 'package:keep_n_touch/Presentation/Authentication/view/auth_page_view.dart';
+import 'package:keep_n_touch/Core/routes/app_pages.dart';
+import 'package:keep_n_touch/Core/routes/app_routes.dart';
+import 'package:keep_n_touch/Core/App/app_bindings.dart';
 
 class AppView extends StatelessWidget {
   const AppView({
@@ -26,7 +27,11 @@ class AppView extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: MyApp.appName,
             theme: appTheme(),
-            home: const AuthPageView(),
+            defaultTransition: Transition.zoom,
+            transitionDuration: const Duration(milliseconds: 300),
+            initialRoute: AppRoute.initial,
+            initialBinding: AppBinding(),
+            getPages: AppPages.routes,
           ),
         );
       },

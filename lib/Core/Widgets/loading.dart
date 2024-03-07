@@ -22,16 +22,19 @@ class CustomLoading {
       ..maskType = EasyLoadingMaskType.custom;
   }
 
-  static void show([String? text]) {
+  static void show({String? text}) {
     EasyLoading.instance.userInteractions = true;
     EasyLoading.show(status: text ?? 'Loading...');
   }
 
-  static void toast(String text) {
-    EasyLoading.showToast(text,
-        dismissOnTap: true,
-        maskType: EasyLoadingMaskType.none,
-        toastPosition: EasyLoadingToastPosition.bottom);
+  static void toast(
+      {required String text, EasyLoadingToastPosition? toastPosition}) {
+    EasyLoading.showToast(
+      text,
+      dismissOnTap: true,
+      maskType: EasyLoadingMaskType.none,
+      toastPosition: toastPosition,
+    );
   }
 
   static void dismiss() {

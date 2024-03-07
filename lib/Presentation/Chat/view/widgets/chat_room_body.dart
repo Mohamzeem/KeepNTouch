@@ -5,9 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:keep_n_touch/Core/Models/room_model.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
-import 'package:keep_n_touch/Presentation/Chat/data/chat_data.dart';
+import 'package:keep_n_touch/Presentation/Chat/controller/chat_controller.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/widgets/chat_field_row.dart';
-import 'package:keep_n_touch/Presentation/Chat/view/widgets/chat_room_bar.dart';
+import 'package:keep_n_touch/Core/Widgets/custom_room_bar.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/widgets/contact_msg.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/widgets/user_msg.dart';
 
@@ -44,7 +44,7 @@ class _ChatBodyState extends State<ChatRoomBody> {
   }
 
   void _sayHello() async {
-    ChatData.sendMessage(
+    ChatController().sendMessage(
       roomId: widget.roomModel.id!,
       contactId:
           FirebaseAuth.instance.currentUser!.uid == widget.roomModel.contactId!
@@ -60,7 +60,7 @@ class _ChatBodyState extends State<ChatRoomBody> {
 
   void _sendMsg() async {
     if (controller.text.isNotEmpty) {
-      await ChatData.sendMessage(
+      await ChatController().sendMessage(
         roomId: widget.roomModel.id!,
         contactId: FirebaseAuth.instance.currentUser!.uid ==
                 widget.roomModel.contactId!
@@ -77,7 +77,7 @@ class _ChatBodyState extends State<ChatRoomBody> {
   }
 
   void _sendImage() {
-    ChatData.sendImage(
+    ChatController().sendImage(
       roomId: widget.roomModel.id!,
       contactId:
           FirebaseAuth.instance.currentUser!.uid == widget.roomModel.contactId!
@@ -97,10 +97,21 @@ class _ChatBodyState extends State<ChatRoomBody> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ChatRoomBar(roomModel: widget.roomModel),
+          CustomRoomBar(
+            onTap: () {},
+            names: 'sds',
+            photoUrl: widget.roomModel.contactId ==
+                    FirebaseAuth.instance.currentUser!.uid
+                ? widget.roomModel.isSenderPhoto
+                : widget.roomModel.iscontactPhoto,
+            title: widget.roomModel.contactId ==
+                    FirebaseAuth.instance.currentUser!.uid
+                ? widget.roomModel.senderName!
+                : widget.roomModel.contactName!,
+          ),
           SizedBox(height: 15.h),
           StreamBuilder(
-            stream: ChatData.getMessages(roomId: widget.roomModel.id!),
+            stream: ChatController().getMessages(roomId: widget.roomModel.id!),
             builder: (context, snapshots) {
               if (snapshots.hasError) {
                 return const Expanded(
@@ -136,7 +147,7 @@ class _ChatBodyState extends State<ChatRoomBody> {
                               //^check msg read
                               if (msgModel.contactId ==
                                   FirebaseAuth.instance.currentUser!.uid) {
-                                ChatData.isReadMessage(
+                                ChatController().isReadMessage(
                                     roomId: widget.roomModel.id!,
                                     msgId: msgModel.id!);
                               }

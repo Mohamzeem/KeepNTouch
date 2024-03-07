@@ -5,6 +5,32 @@ import 'package:keep_n_touch/Core/Widgets/custom_button.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
 
 class CustomDialog {
+  static Future<void> oneDialog({
+    required BuildContext context,
+    required String textBody,
+    required void Function() onPressed,
+  }) async {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: AppColors.kWhite,
+          title: InkWell(
+            onTap: onPressed,
+            child: SizedBox(
+              width: 200,
+              height: 200,
+              child: CustomText(
+                text: textBody,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   static Future<void> oneButtonDialog({
     required BuildContext context,
     required String textBody,
@@ -40,15 +66,19 @@ class CustomDialog {
   static Future<void> twoButtonDialog({
     required BuildContext context,
     required String textBody,
+    Color? backGroundColor,
     required String textButton1,
     required String textButton2,
     required void Function() onPressed,
   }) async {
     showDialog(
-      barrierDismissible: false,
+      barrierDismissible: true,
+      barrierColor: Colors.transparent,
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: AppColors.kWhite,
+        elevation: 10,
+        surfaceTintColor: backGroundColor ?? AppColors.secColor,
+        backgroundColor: backGroundColor ?? AppColors.secColor,
         title: Center(
           child: CustomText(
             text: textBody,

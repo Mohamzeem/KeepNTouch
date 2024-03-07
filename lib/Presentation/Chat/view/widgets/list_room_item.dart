@@ -1,11 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:keep_n_touch/Core/Models/room_model.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_cached_image.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
-import 'package:keep_n_touch/Presentation/Chat/view/chat_room_view.dart';
+import 'package:keep_n_touch/Core/routes/app_routes.dart';
 
 class ListRoomItem extends StatelessWidget {
   final RoomModel roomModel;
@@ -19,11 +20,9 @@ class ListRoomItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: InkWell(
-        onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => ChatRoomView(roomModel: roomModel),
-        )),
+        onTap: () => Get.toNamed(AppRoute.chatRoomView, arguments: roomModel),
         child: SizedBox(
-          height: 60,
+          height: 65,
           child: Card(
             elevation: 5,
             surfaceTintColor: Colors.transparent,

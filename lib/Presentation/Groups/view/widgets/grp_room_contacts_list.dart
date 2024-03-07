@@ -1,40 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Utils/app_strings.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_cached_image.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
+import 'package:keep_n_touch/Presentation/Groups/controller/grps.controller.dart';
 
-class ContactsList extends StatefulWidget {
-  bool isChecked;
-  ContactsList({
+class GroupRoomsContactsList extends GetView<GroupsController> {
+  const GroupRoomsContactsList({
     super.key,
-    this.isChecked = false,
   });
 
   @override
-  State<ContactsList> createState() => _ContactsListState();
-}
-
-class _ContactsListState extends State<ContactsList> {
-  // bool isChecked = false;
-
-  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 500,
+    return Expanded(
       child: ListView.builder(
-        itemCount: 3,
+        itemCount: 5,
+        shrinkWrap: true,
         itemBuilder: (BuildContext builder, int index) {
           return Card(
             surfaceTintColor: AppColors.secColor,
             color: AppColors.secColor,
             child: InkWell(
-              onTap: () {
-                setState(() => widget.isChecked = !widget.isChecked);
-                print('${widget.isChecked} is checked');
-              },
+              onTap: () => controller.isChecked = !controller.isChecked,
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -49,20 +40,21 @@ class _ContactsListState extends State<ContactsList> {
                       fontSize: 25,
                     ),
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 0),
-                      child: Transform.scale(
-                        scale: 1.2,
-                        child: Checkbox(
-                          value: widget.isChecked,
-                          onChanged: (value) =>
-                              setState(() => widget.isChecked = value!),
-                          activeColor: AppColors.secColor,
-                          checkColor: AppColors.mainColor,
-                          side: const BorderSide(color: AppColors.mainColor),
+                    GetBuilder<GroupsController>(
+                      builder: (_) => Padding(
+                        padding: const EdgeInsets.only(top: 0),
+                        child: Transform.scale(
+                          scale: 1.2,
+                          child: Checkbox(
+                            value: controller.states.isChecked,
+                            onChanged: (value) => controller.isChecked = value!,
+                            activeColor: AppColors.secColor,
+                            checkColor: AppColors.mainColor,
+                            side: const BorderSide(color: AppColors.mainColor),
+                          ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

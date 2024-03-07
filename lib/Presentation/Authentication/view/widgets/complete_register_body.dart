@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_button.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
 import 'package:keep_n_touch/Core/Widgets/loading.dart';
 import 'package:keep_n_touch/Core/Widgets/text_form_field.dart';
-import 'package:keep_n_touch/Presentation/Authentication/data/auth_data.dart';
+import 'package:keep_n_touch/Presentation/Authentication/controller/auth_controller.dart';
 import 'package:keep_n_touch/Presentation/Authentication/view/login_view.dart';
 
 class CompleteRegisterBody extends StatefulWidget {
@@ -85,12 +86,16 @@ class _CompleteRegisterBodyState extends State<CompleteRegisterBody> {
           CustomButton(
             onPressed: () {
               if (nameController.text == '') {
-                CustomLoading.toast('Name is required');
+                CustomLoading.toast(
+                    text: 'Name is required',
+                    toastPosition: EasyLoadingToastPosition.center);
               } else if (nameController.text.length < 8) {
-                CustomLoading.toast('Need full name');
+                CustomLoading.toast(
+                    text: 'Need full name',
+                    toastPosition: EasyLoadingToastPosition.center);
               } else {
-                AuthData.saveUserData(
-                    name: nameController.text, context: context);
+                AuthController()
+                    .saveUserData(name: nameController.text, context: context);
                 nameController.clear();
               }
             },
@@ -105,7 +110,7 @@ class _CompleteRegisterBodyState extends State<CompleteRegisterBody> {
           SizedBox(height: 20.h),
           CustomButton(
             onPressed: () {
-              AuthData.signOut(context: context);
+              AuthController().signOut(context: context);
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const LoginView(),
               ));

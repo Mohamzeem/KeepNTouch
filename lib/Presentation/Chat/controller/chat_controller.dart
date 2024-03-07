@@ -1,24 +1,29 @@
-// ignore_for_file: use_build_context_synchronously
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:keep_n_touch/Core/Models/msg_model.dart';
 import 'package:keep_n_touch/Core/Models/room_model.dart';
 import 'package:keep_n_touch/Core/Utils/app_strings.dart';
 import 'package:keep_n_touch/Core/Widgets/loading.dart';
 
-class ChatData {
-  ChatData._();
+class ChatController extends GetxController {
+  final firebaseStore = FirebaseFirestore.instance;
+  final auth = FirebaseAuth.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
+  final chatController = TextEditingController();
 
-  static final firebaseStore = FirebaseFirestore.instance;
-  static final auth = FirebaseAuth.instance;
-  static final FirebaseStorage storage = FirebaseStorage.instance;
+  @override
+  void dispose() {
+    chatController.dispose();
+    super.dispose();
+  }
 
-  static Future createChatRoom(
+  Future _createChatRoom(
       {required String email, required BuildContext context}) async {
     final contactEmailUser = await firebaseStore
         .collection(AppStrings.usersCollection)
@@ -57,14 +62,33 @@ class ChatData {
             .collection(AppStrings.chatCollection)
             .doc(roomId.toString())
             .set(roomModel.toMap())
-            .whenComplete(() => CustomLoading.toast('Chat created'));
+            .whenComplete(() => CustomLoading.toast(text: 'Chat created'));
       }
     } else {
-      CustomLoading.toast('No User Found');
+      CustomLoading.toast(text: 'No User Found');
     }
   }
 
-  static Stream<List<RoomModel>> getRooms() {
+  void createRoomFunction(BuildContext context) {
+    if (chatController.text.isEmpty) {
+      CustomLoading.toast(
+          text: 'Please enter an email',
+          toastPosition: EasyLoadingToastPosition.center);
+    } else if (chatController.text.length < 5) {
+      CustomLoading.toast(
+          text: 'Email not completed',
+          toastPosition: EasyLoadingToastPosition.center);
+    } else {
+      _createChatRoom(
+        context: context,
+        email: chatController.text.trim(),
+      );
+      Navigator.pop(context);
+      chatController.clear();
+    }
+  }
+
+  Stream<List<RoomModel>> getChatRooms() {
     return firebaseStore
         .collection(AppStrings.chatCollection)
         .where('members', arrayContains: auth.currentUser!.uid)
@@ -93,7 +117,7 @@ class ChatData {
     );
   }
 
-  static Future sendMessage({
+  Future sendMessage({
     required String msg,
     required String contactId,
     required String contactName,
@@ -123,7 +147,7 @@ class ChatData {
         .set(messageModel.toMap());
   }
 
-  static Stream<List<MessageModel>> getMessages({required String roomId}) {
+  Stream<List<MessageModel>> getMessages({required String roomId}) {
     return firebaseStore
         .collection(AppStrings.chatCollection)
         .doc(roomId)
@@ -152,7 +176,7 @@ class ChatData {
     );
   }
 
-  static Future sendImage(
+  Future sendImage(
       {required String roomId,
       required String contactId,
       required String contactName}) async {
@@ -169,7 +193,7 @@ class ChatData {
     }
   }
 
-  static Future uploadImage({
+  Future uploadImage({
     required File file,
     required String roomId,
     required String contactId,
@@ -180,7 +204,7 @@ class ChatData {
     final ref = storage
         .ref('MessageImages')
         .child('$roomId/${DateTime.now().millisecondsSinceEpoch}.$imagePath');
-    CustomLoading.show('Sending');
+    CustomLoading.show(text: 'Sending');
     await ref.putFile(file);
     CustomLoading.dismiss();
     final String imageUrl = await ref.getDownloadURL();
@@ -195,8 +219,7 @@ class ChatData {
     print('Image = $imageUrl');
   }
 
-  static Future isReadMessage(
-      {required String roomId, required String msgId}) async {
+  Future isReadMessage({required String roomId, required String msgId}) async {
     await firebaseStore
         .collection(AppStrings.chatCollection)
         .doc(roomId)

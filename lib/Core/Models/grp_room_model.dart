@@ -11,8 +11,7 @@ class GroupsRoomModel extends Equatable {
   final String? senderId;
   final String? senderName;
   final String? senderPhoto;
-  // final String? contactId;
-  // final String? contactName;
+  final String? groupName;
   final String? groupPhoto;
 
   const GroupsRoomModel({
@@ -25,8 +24,7 @@ class GroupsRoomModel extends Equatable {
     this.senderId,
     this.senderName,
     this.senderPhoto,
-    // this.contactId,
-    // this.contactName,
+    this.groupName,
     this.groupPhoto,
   });
 
@@ -41,9 +39,8 @@ class GroupsRoomModel extends Equatable {
       'senderId': senderId,
       'senderName': senderName,
       'senderPhoto': senderPhoto,
-      // 'contactId': contactId,
-      // 'contactName': contactName,
       'groupPhoto': groupPhoto,
+      'groupName': groupName,
     };
   }
 
@@ -58,8 +55,7 @@ class GroupsRoomModel extends Equatable {
       senderId: map['senderId'] ?? "",
       senderName: map['senderName'] ?? "",
       senderPhoto: map['senderPhoto'] ?? "",
-      // contactId: map['contactId'] ?? "",
-      // contactName: map['contactName'] ?? "",
+      groupName: map['groupName'] ?? "",
       groupPhoto: map['groupPhoto'] ?? "",
     );
   }
@@ -75,8 +71,7 @@ class GroupsRoomModel extends Equatable {
       senderId!,
       senderName!,
       senderPhoto!,
-      // contactId!,
-      // contactName!,
+      groupName!,
       groupPhoto!,
     ];
   }
@@ -90,7 +85,7 @@ class GroupsRoomModel extends Equatable {
 
   String get isGroupPhoto {
     if (groupPhoto!.isEmpty || groupPhoto == "") {
-      return AppStrings.defaultAppPhoto;
+      return AppStrings.noImage;
     }
     return groupPhoto!;
   }

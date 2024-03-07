@@ -1,19 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:keep_n_touch/Core/Models/room_model.dart';
+import 'package:get/get.dart';
+import 'package:keep_n_touch/Core/Models/grp_room_model.dart';
 import 'package:keep_n_touch/Core/Utils/app_colors.dart';
-import 'package:keep_n_touch/Core/Utils/app_strings.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_cached_image.dart';
 import 'package:keep_n_touch/Core/Widgets/custom_text.dart';
-import 'package:keep_n_touch/Presentation/Chat/view/chat_room_view.dart';
-import 'package:keep_n_touch/Presentation/Groups/view/group_room_view.dart';
+import 'package:keep_n_touch/Core/routes/app_routes.dart';
 
-class ListGroupsRoomItem extends StatelessWidget {
-  // final RoomModel roomModel;
-  const ListGroupsRoomItem({
+class GroupsRoomItem extends StatelessWidget {
+  final GroupsRoomModel groupsRoomModel;
+  const GroupsRoomItem({
     super.key,
-    // required this.roomModel,
+    required this.groupsRoomModel,
   });
 
   @override
@@ -21,49 +19,39 @@ class ListGroupsRoomItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 3),
       child: InkWell(
-        onTap: () => Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const GroupsRoomView(),
-          ),
-        ),
+        onTap: () =>
+            Get.toNamed(AppRoute.groupsRoomView, arguments: groupsRoomModel),
         child: SizedBox(
-          height: 60,
+          height: 65,
           child: Card(
             elevation: 5,
             surfaceTintColor: Colors.transparent,
             color: AppColors.secColor,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 5.h),
-              child: const Row(
+              child: Row(
                 children: [
                   CustomCachedImage(
                     height: 40,
-                    width: 40, photoUrl: AppStrings.defaultAppPhoto,
-                    // photoUrl: roomModel.contactId ==
-                    //         FirebaseAuth.instance.currentUser!.uid
-                    //     ? roomModel.isSenderPhoto
-                    //     : roomModel.iscontactPhoto,
+                    width: 40,
+                    photoUrl: groupsRoomModel.isGroupPhoto,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        text: 'Sender',
-                        // text: roomModel.contactId ==
-                        //         FirebaseAuth.instance.currentUser!.uid
-                        //     ? roomModel.senderName!
-                        //     : roomModel.contactName!,
+                        text: groupsRoomModel.groupName!,
                         fontSize: 17,
                       ),
                       CustomText(
-                        text: 'roomModel.lastMessage!',
+                        text: groupsRoomModel.lastMessageSender!,
                         fontSize: 15,
                       ),
                     ],
                   ),
-                  Spacer(),
-                  CircleAvatar(
+                  const Spacer(),
+                  const CircleAvatar(
                     radius: 15,
                     backgroundColor: AppColors.mainColor,
                     child: CustomText(
