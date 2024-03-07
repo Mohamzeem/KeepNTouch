@@ -48,8 +48,8 @@ class UserModel extends Equatable {
   }
 
   String get isPhoto {
-    if (photo!.isEmpty) {
-      return AppStrings.defaultEmail;
+    if (photo!.isEmpty || photo == "" || photo == null) {
+      return AppStrings.defaultAppPhoto;
     }
     return photo!;
   }

@@ -35,7 +35,6 @@ class SettingsBody extends GetWidget<SettingsController> {
                 ),
               ),
             ),
-
             SizedBox(height: 20.h),
             const ProfileImage(),
             SizedBox(height: 20.h),

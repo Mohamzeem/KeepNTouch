@@ -10,7 +10,7 @@ import 'package:keep_n_touch/Core/Widgets/loading.dart';
 import 'package:keep_n_touch/Presentation/Authentication/controller/auth_states.dart';
 import 'package:keep_n_touch/Presentation/Authentication/view/complete_register_view.dart';
 import 'package:keep_n_touch/Presentation/Authentication/view/login_view.dart';
-import 'package:keep_n_touch/Presentation/Home/view/control_view.dart';
+import 'package:keep_n_touch/Presentation/Home/view/home_view.dart';
 
 class AuthController extends GetxController {
   AuthController();
@@ -60,7 +60,7 @@ class AuthController extends GetxController {
           ));
         } else {
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const ControlView(),
+            builder: (context) => const HomeView(),
           ));
         }
       }).then(

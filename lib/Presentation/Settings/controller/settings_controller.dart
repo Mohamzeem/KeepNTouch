@@ -24,6 +24,8 @@ class SettingsController extends GetxController {
   void onInit() {
     super.onInit();
     _getProfile();
+    // profile;
+    print('object');
   }
 
   @override
@@ -35,11 +37,11 @@ class SettingsController extends GetxController {
     super.dispose();
   }
 
-  UserModel get profile => states.userModel.value;
-  set profile(UserModel value) {
-    states.userModel.value = value;
-    update();
-  }
+  // UserModel get profile => states.userModel.value;
+  // set profile(UserModel value) {
+  //   states.userModel.value = value;
+  //   update();
+  // }
 
   String get newName => states.userName.value;
   set newName(String value) {
@@ -61,7 +63,7 @@ class SettingsController extends GetxController {
     final user = UserModel.fromJson(result.data()!);
     newName = user.name!;
     newPhoto = user.photo!;
-    profile = user;
+    states.userModel.value = user;
     return user;
   }
 

@@ -15,9 +15,9 @@ class BuildVerison extends GetWidget<SettingsController> {
   Widget build(BuildContext context) {
     return SettingsItem(
       onTap: () {
-        // print('1 ${controller.newName}');
-        // print('2 ${controller.profile.id}');
-        // print('3 ${controller.newPhoto}');
+        print('1 ${controller.newName}');
+        print('2 ${controller.states.userModel.value.id}');
+        print('3 ${controller.states.userModel.value.isPhoto}');
       },
       icon: Icons.verified_user_outlined,
       mainText: 'Build Verison',

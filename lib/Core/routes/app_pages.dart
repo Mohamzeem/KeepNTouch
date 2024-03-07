@@ -10,7 +10,7 @@ import 'package:keep_n_touch/Presentation/Authentication/view/login_view.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/chat_room_view.dart';
 import 'package:keep_n_touch/Presentation/Chat/view/chat_view.dart';
 import 'package:keep_n_touch/Presentation/Contacts/contacts_view.dart';
-import 'package:keep_n_touch/Presentation/Home/view/control_view.dart';
+import 'package:keep_n_touch/Presentation/Home/view/home_view.dart';
 import 'package:keep_n_touch/Presentation/Groups/view/create_grp_view.dart';
 import 'package:keep_n_touch/Presentation/Groups/view/group_room_view.dart';
 import 'package:keep_n_touch/Presentation/Groups/view/groups_view.dart';
@@ -54,7 +54,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoute.contactsView,
-      page: () => const ControlView(),
+      page: () => const HomeView(),
     ),
     GetPage(
       name: AppRoute.groupsView,

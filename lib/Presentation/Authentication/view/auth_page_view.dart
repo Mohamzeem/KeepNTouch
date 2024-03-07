@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:keep_n_touch/Presentation/Authentication/controller/auth_controller.dart';
 import 'package:keep_n_touch/Presentation/Authentication/view/complete_register_view.dart';
 import 'package:keep_n_touch/Presentation/Authentication/view/login_view.dart';
-import 'package:keep_n_touch/Presentation/Home/view/control_view.dart';
+import 'package:keep_n_touch/Presentation/Home/view/home_view.dart';
 
 class AuthPageView extends StatelessWidget {
   const AuthPageView({super.key});
@@ -20,7 +20,7 @@ class AuthPageView extends StatelessWidget {
                 FirebaseAuth.instance.currentUser!.displayName!.isEmpty) {
               return const CompleteRegisterView();
             } else {
-              return const ControlView();
+              return const HomeView();
             }
           } else {
             return const LoginView();
